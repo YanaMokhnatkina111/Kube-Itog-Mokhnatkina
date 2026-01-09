@@ -1,0 +1,30 @@
+name: "Code Quality & Testing"
+
+on:
+  push:
+    paths:
+      - '**.go'
+      - 'go.mod'
+  workflow_dispatch:
+
+jobs:
+  static_analysis:
+    runs-on: ubuntu-latest 
+    
+    steps:
+      - name: "Source Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Environment Setup: Go" 
+        uses: actions/setup-go@v5 
+        with:
+          go-version: "1.24"
+          cache: true 
+      - name: "Go Toolchain Info"
+        run: |
+          printf "Build Environment Information:\n"
+          go version
+          go env
+
+      - name: "Execute Unit Tests"
+        run: go test -v ./...

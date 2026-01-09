@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: info-app
+  namespace: sirius
+spec:
+  selector:
+    matchLabels:
+      app: info-app
+  template:
+    metadata:
+      labels:
+        app: info-app
+    spec:
+      containers:
+        - name: info-app
+          image: mokhnatkinayana/info-app:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "48Mi"
+              cpu: "120m"
+            limits:
+              memory: "160Mi"
+              cpu: "450m"
+          envFrom:
+            - configMapRef:
+                name: info-conf

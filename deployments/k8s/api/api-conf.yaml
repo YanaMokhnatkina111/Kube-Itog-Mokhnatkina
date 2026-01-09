@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-conf
+  namespace: sirius
+  labels:
+    component: api
+data:
+  API_APP_NAME: "API"
+  API_BIND_PORT: "8080"

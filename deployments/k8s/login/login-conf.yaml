@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: login-conf
+  namespace: sirius
+  labels:
+    service-group: auth
+data:
+  LOGIN_APP_NAME: "Auth-Login-Service"
+  LOGIN_BIND_PORT: "8080"

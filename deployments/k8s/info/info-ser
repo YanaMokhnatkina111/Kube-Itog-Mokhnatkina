@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: info-service
+  namespace: sirius
+  labels:
+    app.kubernetes.io/name: info-service
+spec:
+  selector:
+    app: info-app
+  ports:
+  - port: 80
+    targetPort: 8080

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login-app
+  namespace: sirius
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: login-app
+  template:
+    metadata:
+      labels:
+        app: login-app
+    spec:
+      containers:
+        - name: login-app
+          image: mokhnatkinayana/login-app:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "40Mi"
+              cpu: "110m"
+            limits:
+              memory: "192Mi"
+              cpu: "400m"
+          envFrom:
+            - configMapRef:
+                name: login-conf

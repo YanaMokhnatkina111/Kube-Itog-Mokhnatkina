@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: root-app
+  namespace: sirius
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: root-app
+  template:
+    metadata:
+      labels:
+        app: root-app
+    spec:
+      containers:
+        - name: root-app
+          image: mokhnatkinayana/root-app:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "40Mi"
+              cpu: "150m"
+            limits:
+              memory: "200Mi"
+              cpu: "450m"
+          envFrom:
+            - configMapRef:
+                name: root-conf

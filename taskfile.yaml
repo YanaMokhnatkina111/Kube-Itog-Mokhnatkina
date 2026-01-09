@@ -1,0 +1,33 @@
+version: "3"
+
+dotenv:
+  - .env
+
+tasks:
+  build:
+    cmds:
+      - docker build -f ./cmd/api-service/Dockerfile -t mokhnatkinayana/api-app:latest .
+      - docker build -f ./cmd/info-service/Dockerfile -t mokhnatkinayana/info-app:latest .
+      - docker build -f ./cmd/login-service/Dockerfile -t mokhnatkinayana/login-app:latest .
+      - docker build -f ./cmd/root-service/Dockerfile -t mokhnatkinayana/root-app:latest .
+
+  
+  push:
+    cmds:
+      - docker push mokhnatkinayana/api-app:latest 
+      - docker push mokhnatkinayana/info-app:latest 
+      - docker push mokhnatkinayana/login-app:latest 
+      - docker push mokhnatkinayana/root-app:latest 
+
+  deploy:
+    cmds:
+      - kubectl apply -n sirius -f ./deployments/k8s/api/
+      - kubectl apply -n sirius -f ./deployments/k8s/info/
+      - kubectl apply -n sirius -f ./deployments/k8s/login/
+      - kubectl apply -n sirius -f ./deployments/k8s/root/
+      - kubectl apply -n sirius -f ./deployments/k8s/ingress.yaml
+
+  release:
+    cmds:
+      - task: build
+      - task: deploy

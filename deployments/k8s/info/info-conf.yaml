@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: info-conf
+  namespace: sirius
+  labels:
+    tier: backend
+data:
+  INFO_APP_NAME: "Information-Service"
+  INFO_BIND_PORT: "8080"
